@@ -6,11 +6,13 @@
 
     <parent>
         <groupId>de.raindancer.modules</groupId>
-        <artifactId>rains-flexible-modules</artifactId>
+        <artifactId>voicebridge-build</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <artifactId>voicebridge-standalone</artifactId>
+    <!-- Published at the plugin's own version. -->
+    <version>${plugin.version}</version>
     <packaging>jar</packaging>
 
     <name>Rain's Voice Bridge</name>
@@ -20,7 +22,6 @@
     </description>
 
     <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
         <plugin.name>RainsVoiceBridge</plugin.name>
         <!-- 0.1.0: one Discord voice channel joined to one Simple Voice Chat group.
              0.2.0: proximity mode — linked Discord users stand in the world as their player.

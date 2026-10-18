@@ -52,7 +52,7 @@ class VoiceBridgeTokenCommandTest {
         tokens = new BotTokens(secrets, "smp", new YamlStore(folder.resolve("discord-tokens.yml")),
                 folder.resolve("discord-token.txt"), Map.<String, String>of()::get, Log.of("test"));
         VoiceBridgeServices services = new VoiceBridgeServices(null, null, Log.of("test"), messages, null, null,
-                null, tokens, null, null, null, null, null, null);
+                null, tokens, null, null, null, null, null, null, null);
         command = new VoiceBridgeCommand(() -> services);
     }
 

@@ -28,7 +28,8 @@
              0.3.0: network-ready — Discord links shared by the whole network in the database, bot tokens a document (discord-tokens.yml) instead of discord-token.txt; 1.x files come across by themselves. -->
         <!-- 0.4.0: bot tokens are a secret in the network database (/voicebridge token add from the console), no longer a document; discord-tokens.yml and discord-token.txt are moved over and emptied. -->
         <!-- 0.5.0: team voice for games: RainsCore's VoiceGroups asks, a hidden isolated SVC group answers (TeamVoice). -->
-        <plugin.version>0.5.0</plugin.version>
+        <!-- 0.6.0: standing voice groups — General for everybody at all times, a hidden Staff group while staff are online; /voicebridge general, /voicebridge staff. -->
+        <plugin.version>0.6.0</plugin.version>
     </properties>
 
     <dependencies>

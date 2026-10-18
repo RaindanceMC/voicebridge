@@ -6,3 +6,5 @@ voicebridge:
     connected: "<aqua>Discord voice is connected. Players near you can hear you, and you can hear them. <gray>/voicebridge groups for voice groups."
     dm:
       has-mod: "Simple Voice Chat is installed in your game, so Discord is not needed for voice chat."
+  channels:
+    not-staff: "<gray>The staff voice group is for staff only."

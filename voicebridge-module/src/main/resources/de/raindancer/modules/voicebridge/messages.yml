@@ -85,6 +85,14 @@ voicebridge:
       no-permission: "You may not use voice chat on the Minecraft server."
       failed: "Your private voice channel could not be set up. Please tell the server staff."
 
+  channels:
+    joined-general: "<green>You are in the General voice group."
+    joined-staff: "<green>You are in the staff voice group."
+    not-staff: "<gray>The staff voice group is for staff. It is also hidden, so officially you never heard of it."
+    no-voice-chat: "<red>Voice chat is not running on this server."
+    no-mod: "<gray>You need the Simple Voice Chat mod connected to join a voice group."
+    no-staff-group: "<gray>The staff voice group is not there yet — give it a few seconds."
+
   groups:
     usage: "<gray>/voicebridge group join <name> [password]  ·  group leave  ·  group create <name> [password] [normal|open|isolated]"
     joined: "<green>You joined the voice group."

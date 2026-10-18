@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public final class VoiceBridgeModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.5.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.6.0")
             .describedAs("A Discord voice channel joined to a Simple Voice Chat group.")
             .by("Raindancer118");
 
@@ -118,6 +118,18 @@ public final class VoiceBridgeModule implements FlexModule {
                 new de.raindancer.modules.voicebridge.service.TeamVoice(gateway::api));
         voiceOwner = context.plugin().getName() + ":voicebridge";
 
+        var channelSettings = context.settings(StandingVoiceSettings.class, StandingVoiceSettings.DEFAULTS);
+        var standing = new de.raindancer.modules.voicebridge.service.StandingVoice(gateway::api, player -> {
+            Player online = server.getPlayer(player);
+            return online != null && online.hasPermission(channelSettings.current().staffPermissionOrDefault());
+        }, channelSettings.current());
+        channelSettings.onChange(standing::settings);
+        // Every five seconds: voice chat may start after this module, and staff come and go.
+        var standingTimer = Scheduling.globalTimer(context.plugin(), 40, 100, task -> standing.tick(onlinePlayers(server)));
+        if (standingTimer != null) {
+            context.closeWith(standingTimer::cancel);
+        }
+
         settings.onChange(toDiscord::settings);
         settings.onChange(discord::settings);
         settings.onChange(gateway::settings);
@@ -126,7 +138,7 @@ public final class VoiceBridgeModule implements FlexModule {
 
         services = new VoiceBridgeServices(context.plugin(), server, log, context.core().messages(),
                 context.chat().brand(), context.core(), settings::current, tokens, bridge, gateway, links, groups,
-                lobby, new LiveScreens());
+                lobby, new LiveScreens(), standing);
         context.listener(new PresenceListener(services));
         context.listener(new VoicechatCommandListener(services));
         VoiceBridgeCommands.ready(services);

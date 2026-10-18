@@ -31,7 +31,8 @@ public record VoiceBridgeServices(
         LinkService links,
         GroupService groups,
         LobbyService lobby,
-        IVoiceBridgeScreensOpener screens) {
+        IVoiceBridgeScreensOpener screens,
+        de.raindancer.modules.voicebridge.service.StandingVoice standing) {
 
     public VoiceBridgeSettings config() {
         return settings.get();

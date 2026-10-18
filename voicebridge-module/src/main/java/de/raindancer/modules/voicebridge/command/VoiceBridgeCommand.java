@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 public final class VoiceBridgeCommand implements IVoiceBridgeCommand {
 
     private static final List<String> SUBCOMMANDS = List.of("join", "leave", "status", "link", "unlink",
-            "groups", "group", "invite", "reconnect", "token");
+            "groups", "group", "invite", "general", "staff", "reconnect", "token");
     private static final List<String> GROUP_SUBCOMMANDS = List.of("join", "leave", "create");
 
     private final Supplier<VoiceBridgeServices> services;
@@ -52,7 +52,7 @@ public final class VoiceBridgeCommand implements IVoiceBridgeCommand {
                     live.screens().root(player);
                 }
             }
-            case "join", "leave", "link", "unlink", "groups", "group", "invite" -> {
+            case "join", "leave", "link", "unlink", "groups", "group", "invite", "general", "staff" -> {
                 if (!(sender instanceof Player player)) {
                     live.messages().send(sender, "voicebridge.only-a-player");
                 } else if (allowed(live, player)) {
@@ -85,6 +85,10 @@ public final class VoiceBridgeCommand implements IVoiceBridgeCommand {
                         ? "voicebridge.link.unlinked" : "voicebridge.link.not-linked");
             }
             case "groups" -> live.screens().groups(player);
+            case "general" -> answer(live, player, live.standing().joinGeneral(player.getUniqueId()),
+                    "voicebridge.channels.joined-general");
+            case "staff" -> answer(live, player, live.standing().joinStaff(player.getUniqueId()),
+                    "voicebridge.channels.joined-staff");
             case "group" -> group(live, player, args);
             case "invite" -> {
                 Player target = args.length < 2 ? null : live.server().getPlayerExact(args[1]);

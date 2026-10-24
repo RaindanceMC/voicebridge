@@ -1,0 +1,67 @@
+id: voice-chat
+title: Voice chat & Discord
+summary: Talk to Discord from the game, make voice groups, join the standing groups and link your Discord account.
+intro: |
+  Yes, you can talk to people — with your actual voice, like it is 2004. This page covers the voice groups, the bridge to Discord, and what to do if you do not want to install the mod.
+icon: NOTE_BLOCK
+category: Chat & community
+order: 45
+module: voicebridge
+permission: rainsvoicebridge.use
+aliases: [voicebridge, voice, vb, discord, discordvoice, voicechat, svc, mic, proximity, groups, voice-groups]
+keywords: [microphone, talk, speak, simple voice chat, link, group, password, invite, general, staff]
+commands: [voicebridge]
+related: [voice-admin]
+sections:
+  - question: What is the voice bridge?
+    title: What it is
+    text: |
+      Next to the in-game voice chat, the server has a bot sitting in a Discord voice channel. Everyone who joins the bridged voice group — <white>{setting:voicebridge:group-name}</white> — hears Discord, and Discord hears them.
+      {if:voicebridge:enabled}The bridge is on right now.{else}The bridge is switched off at the moment: the group stays, it just carries nothing to or from Discord.{/if}
+      Type {run:/voicebridge} for the page that does it all with buttons.
+  - question: What do I need to use voice chat?
+    title: Requirements
+    text: |
+      The <white>Simple Voice Chat</white> mod, installed and connected, for groups and for joining the Discord bridge. Without it, the commands tell you so. No mod? If you link your Discord account, you can still talk through Discord — see proximity below.
+  - question: How do I join the Discord group?
+    title: Joining the bridge
+    text: |
+      {cmd:/voicebridge join} puts you in the bridged group <white>{setting:voicebridge:group-name}</white>; {cmd:/voicebridge leave} takes you out. Everything you say there is heard on Discord, so mind what you mutter.
+      You can also join from the voice chat's own group menu. {cmd:/voicebridge status} tells you whether the bot is connected, who is on Discord and how many are in the group.
+  - question: Who joined the Discord call?
+    title: Join notices
+    when: voicebridge:announce-discord-joins
+    text: |
+      When somebody joins or leaves the Discord channel, everyone in the group gets a short chat line saying so.
+  - question: How loud is Discord?
+    title: Volume
+    text: |
+      Discord is played in game at {setting:voicebridge:volume.discord-in-game|percent} of its own volume, and the game is heard on Discord at {setting:voicebridge:volume.game-on-discord|percent}. You can turn Discord down for yourself in the voice chat's volume menu.
+  - question: How do I make or join a voice group?
+    title: Voice groups
+    text: |
+      {run:/voicebridge groups} lists every group with its members, type and whether it has a password.
+      {cmd:/voicebridge group join <name> [password]} joins one; {cmd:/voicebridge group leave} leaves yours.
+      {cmd:/voicebridge group create <name> [password] [type]} makes one and puts you in it. The name is 1 to 24 characters; type is <white>normal</white>, <white>open</white> or <white>isolated</white> (normal if you leave it out). Two groups with the same name? Join from the list instead.
+      You need permission to use voice groups on this server; if not, you are told so.
+  - question: How do I invite someone to my group?
+    title: Invites
+    text: |
+      {cmd:/voicebridge invite <player>} sends them a message with a <green>[Join]</green> button, good for five minutes and one use. Accepting gets them in without the password — you were already inside, after all.
+  - question: What are the General and staff groups?
+    title: Standing groups
+    when: voicebridge-channels:general.enabled || voicebridge-channels:staff.enabled
+    text: |
+      {if:voicebridge-channels:general.enabled}<white>{setting:voicebridge-channels:general.name}</white> is a group that is always there and everybody can join with {cmd:/voicebridge general}. Nobody is put in it automatically.{/if}
+      {if:voicebridge-channels:staff.enabled}<white>{setting:voicebridge-channels:staff.name}</white> is a hidden, locked group that exists while a staff member is online. Staff join with {cmd:/voicebridge staff}; everybody else cannot see it, so officially you never heard of it.{/if}
+  - question: How do I link my Discord account?
+    title: Linking
+    when: voicebridge:proximity.enabled
+    text: |
+      Type {cmd:/voicebridge link} in game. You get a code; in the Discord server type <white>/link</white> followed by that code within ten minutes. A wrong, used or expired code is refused — just ask for a fresh one. {cmd:/voicebridge unlink} cuts the link again.
+  - question: Can I use voice without the mod?
+    title: Proximity mode
+    when: voicebridge:proximity.enabled
+    text: |
+      Yes, through Discord. Link your account, then join the lobby voice channel on Discord while you are online in game. The bot moves you into a private channel of your own, and you talk and listen through your player exactly as if you had the mod: people near you hear you, you hear people near you, and you can use voice groups ({cmd:/voicebridge groups}).
+      If every proximity line is busy, try again in a little while. If you already have the mod, you do not need this — you are told so.

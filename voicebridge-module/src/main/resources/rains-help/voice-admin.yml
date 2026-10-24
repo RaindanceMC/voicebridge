@@ -1,0 +1,36 @@
+id: voice-admin
+title: Setting up the voice bridge
+summary: Bot token, Discord ids, reconnecting and what the status says — for whoever runs the bridge.
+intro: |
+  A bot, a token, two ids and some patience. Nothing here is hard, only fiddly.
+icon: JUKEBOX
+category: Staff
+order: 930
+module: voicebridge
+permission: rainsvoicebridge.admin
+aliases: [voicebridge-setup, discord-bot, token, reconnect]
+keywords: [bot, token, discord, server id, channel id, lobby, category, console]
+commands: []
+related: [voice-chat]
+sections:
+  - question: How do I set the bridge up?
+    title: Setup
+    text: |
+      Four things: a bot token (below), the Discord server id (<white>{setting:voicebridge:discord.server-id}</white> now), the voice channel id (<white>{setting:voicebridge:discord.channel-id}</white> now), and the group name. Ids come from Discord with Developer Mode on: right-click the server icon or voice channel and Copy ID. Set them in {run:/settings} under Discord voice bridge, then {cmd:/voicebridge reconnect}.
+      The bot needs Connect and Speak in the voice channel. Switching <white>enabled</white> off disconnects the bot.
+  - question: How do I give the bot its token?
+    title: The token
+    text: |
+      From the server console only — what you type in game lands in the log: {cmd:/voicebridge token add <token>}, or set the <white>RAINS_VOICEBRIDGE_TOKEN</white> variable (it wins over a stored one). {cmd:/voicebridge token clear} removes this server's stored tokens. Then {cmd:/voicebridge reconnect}.
+  - question: How do I know it works?
+    title: Status
+    text: |
+      {cmd:/voicebridge status} says connecting, connected (channel, who is on Discord, who is in the group), or why not. Common ones: Discord refused the token; the bot is not on that Discord server; the channel does not exist or the bot cannot see it; the bot lacks Connect or Speak. {cmd:/voicebridge reconnect} tries again.
+  - question: What are the sound settings?
+    title: Sound
+    text: |
+      Volume both ways is {setting:voicebridge:volume.discord-in-game|percent} and {setting:voicebridge:volume.game-on-discord|percent} (0 to 200). The delay buffer is {setting:voicebridge:buffer-frames|count} steps of 20 ms before old audio is dropped: higher rides out a poor connection, lower is snappier.
+  - question: How does proximity mode work?
+    title: Proximity mode
+    text: |
+      {if:voicebridge:proximity.enabled}It is on. Linked players join the lobby channel <white>{setting:voicebridge:proximity.lobby-channel-id}</white>; the bot moves each into a private channel made in the category <white>{setting:voicebridge:proximity.category-id}</white> (empty means the lobby's own category), served by one extra bot per player at the same time. The main bot needs Manage Channels and Move Members there. Extra bot tokens come with {cmd:/voicebridge token add <token>}.{else}It is off. Turn it on in the settings to let linked Discord users talk through their player without the mod; it needs a lobby channel and one extra bot token per simultaneous user.{/if}

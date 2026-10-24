@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public final class VoiceBridgeModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.6.0")
+    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.7.0")
             .describedAs("A Discord voice channel joined to a Simple Voice Chat group.")
             .by("Raindancer118");
 

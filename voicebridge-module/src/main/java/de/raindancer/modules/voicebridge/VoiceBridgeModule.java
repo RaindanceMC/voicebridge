@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public final class VoiceBridgeModule implements FlexModule {
 
-    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.7.1")
+    private static final ModuleInfo INFO = ModuleInfo.of("voicebridge", "Voice Bridge", "0.8.0")
             .describedAs("A Discord voice channel joined to a Simple Voice Chat group.")
             .by("Raindancer118");
 
@@ -142,6 +142,18 @@ public final class VoiceBridgeModule implements FlexModule {
         context.listener(new PresenceListener(services));
         context.listener(new VoicechatCommandListener(services));
         VoiceBridgeCommands.ready(services);
+        // Screens for /screen — Core 2.10.0; on an older Core there are simply none.
+        try {
+            var screens = context.core().screens();
+            if (screens != null) {
+                new de.raindancer.modules.voicebridge.service.VoiceScreens(bridge, gateway, links, lobby)
+                        .register(screens, context.plugin());
+                context.closeWith(() -> de.raindancer.modules.voicebridge.service.VoiceScreens.KINDS
+                        .forEach(screens::unregister));
+            }
+        } catch (LinkageError olderCore) {
+            context.log().info("RainsCore is older than 2.10.0: no voice screens until it is updated.");
+        }
 
         var tracking = Scheduling.globalTimer(context.plugin(), POSITION_PERIOD_TICKS, POSITION_PERIOD_TICKS,
                 task -> {

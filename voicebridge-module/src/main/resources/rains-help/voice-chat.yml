@@ -9,7 +9,7 @@ order: 45
 module: voicebridge
 permission: rainsvoicebridge.use
 aliases: [voicebridge, voice, vb, discord, discordvoice, voicechat, svc, mic, proximity, groups, voice-groups]
-keywords: [microphone, talk, speak, simple voice chat, link, group, password, invite, general, staff]
+keywords: [microphone, talk, speak, simple voice chat, link, group, password, invite, general, staff, vc]
 commands: [voicebridge]
 related: [voice-admin]
 sections:
@@ -54,6 +54,7 @@ sections:
     text: |
       {if:voicebridge-channels:general.enabled}<white>{setting:voicebridge-channels:general.name}</white> is a group that is always there and everybody can join with {cmd:/voicebridge general}. Nobody is put in it automatically.{/if}
       {if:voicebridge-channels:staff.enabled}<white>{setting:voicebridge-channels:staff.name}</white> is a hidden, locked group that exists while a staff member is online. Staff join with {cmd:/voicebridge staff}; everybody else cannot see it, so officially you never heard of it.{/if}
+      Some servers also keep numbered open groups, like <white>VC 1</white> to <white>VC 5</white> — they are always there; join one from the voice chat window (press V, then Groups).
   - question: How do I link my Discord account?
     title: Linking
     when: voicebridge:proximity.enabled

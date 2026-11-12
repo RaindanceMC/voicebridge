@@ -3,6 +3,7 @@ package de.raindancer.modules.voicebridge;
 import de.raindancer.core.data.settings.Describe;
 import de.raindancer.core.data.settings.In;
 import de.raindancer.core.data.settings.Key;
+import de.raindancer.core.data.settings.Range;
 import de.raindancer.core.data.settings.Settings;
 import de.raindancer.core.data.settings.Title;
 import de.raindancer.core.data.settings.Topic;
@@ -36,10 +37,24 @@ public record StandingVoiceSettings(
         @In("voicebridge/channels") @Title("Who counts as staff")
         @Describe("The permission somebody needs to see and join the staff group.")
         @Key("staff.permission")
-        String staffPermission) {
+        String staffPermission,
+
+        @In("voicebridge/channels") @Title("Numbered groups")
+        @Describe("How many more open groups are always there, numbered — e.g. 5 for VC 1 to VC 5. 0: none.")
+        @Range(min = 0, max = 10)
+        @Key("numbered.count")
+        int numberedCount,
+
+        @In("voicebridge/channels") @Title("Numbered group name")
+        @Describe("What they are called; {n} is the number.")
+        @Key("numbered.name")
+        String numberedName) {
 
     public static final StandingVoiceSettings DEFAULTS =
-            new StandingVoiceSettings(true, "General", true, "Staff", "rains.moderation.staffchat");
+            new StandingVoiceSettings(true, "General", true, "Staff", "rains.moderation.staffchat", 0, "VC {n}");
+
+    /** At most this many numbered groups — also how far back stale ones are cleared. */
+    public static final int MAX_NUMBERED = 10;
 
     public String generalNameOrDefault() {
         return generalName == null || generalName.isBlank() ? DEFAULTS.generalName() : generalName.strip();
@@ -47,6 +62,12 @@ public record StandingVoiceSettings(
 
     public String staffNameOrDefault() {
         return staffName == null || staffName.isBlank() ? DEFAULTS.staffName() : staffName.strip();
+    }
+
+    /** The name of numbered group {@code n}. */
+    public String numberedName(int n) {
+        String pattern = numberedName == null || numberedName.isBlank() ? DEFAULTS.numberedName() : numberedName.strip();
+        return pattern.contains("{n}") ? pattern.replace("{n}", Integer.toString(n)) : pattern + " " + n;
     }
 
     public String staffPermissionOrDefault() {

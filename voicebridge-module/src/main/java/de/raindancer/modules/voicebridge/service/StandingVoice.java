@@ -29,6 +29,10 @@ public final class StandingVoice {
     private static final UUID GENERAL_ID = VoicechatGateway.groupIdFor("standing:general");
     private static final UUID STAFF_ID = VoicechatGateway.groupIdFor("standing:staff");
 
+    private static UUID numberedId(int n) {
+        return VoicechatGateway.groupIdFor("standing:numbered:" + n);
+    }
+
     private final Supplier<Optional<VoicechatServerApi>> api;
     private final Predicate<UUID> isStaff;
     private final SecureRandom random = new SecureRandom();
@@ -60,6 +64,19 @@ public final class StandingVoice {
             }
         } else if (voice.getGroup(GENERAL_ID) != null) {
             voice.removeGroup(GENERAL_ID);
+        }
+
+        int wanted = Math.min(Math.max(now.numberedCount(), 0), StandingVoiceSettings.MAX_NUMBERED);
+        for (int n = 1; n <= StandingVoiceSettings.MAX_NUMBERED; n++) {
+            UUID id = numberedId(n);
+            if (n <= wanted) {
+                if (voice.getGroup(id) == null) {
+                    voice.groupBuilder().setId(id).setName(now.numberedName(n)).setPersistent(true)
+                            .setHidden(false).setType(Group.Type.NORMAL).build();
+                }
+            } else if (voice.getGroup(id) != null) {
+                voice.removeGroup(id);
+            }
         }
 
         boolean staffOn = now.staffOn() && online.stream().anyMatch(isStaff);

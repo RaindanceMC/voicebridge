@@ -137,7 +137,7 @@ class StandingVoiceTest {
     @Test
     @DisplayName("switched off, neither channel is made")
     void off() {
-        voice.settings(new StandingVoiceSettings(false, "General", false, "Staff", "rains.moderation.staffchat"));
+        voice.settings(new StandingVoiceSettings(false, "General", false, "Staff", "rains.moderation.staffchat", 0, "VC {n}"));
 
         voice.tick(List.of(mod));
 
@@ -150,5 +150,36 @@ class StandingVoiceTest {
         StandingVoice none = new StandingVoice(Optional::empty, who -> true, StandingVoiceSettings.DEFAULTS);
         none.tick(List.of(mod));
         assertThat(none.joinStaff(mod)).isEqualTo(StandingVoice.NO_VOICE_CHAT);
+    }
+
+    @Test
+    @DisplayName("numbered groups: VC 1 to VC 5, open to everybody, made once; fewer asked for, the rest go")
+    void numbered() {
+        voice.settings(new StandingVoiceSettings(false, "General", true, "Staff", "rains.moderation.staffchat",
+                5, "VC {n}"));
+        voice.tick(List.of(player));
+        voice.tick(List.of(player));
+
+        assertThat(builders).hasSize(5);
+        for (int n = 1; n <= 5; n++) {
+            Group.Builder builder = builders.get(n - 1);
+            verify(builder).setName("VC " + n);
+            verify(builder).setHidden(false);
+            verify(builder).setPersistent(true);
+            verify(builder, never()).setPassword(any());
+        }
+
+        voice.settings(new StandingVoiceSettings(false, "General", true, "Staff", "rains.moderation.staffchat",
+                2, "VC {n}"));
+        voice.tick(List.of(player));
+        assertThat(existing).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("none numbered by default: only General")
+    void noneByDefault() {
+        voice.tick(List.of(player));
+        assertThat(existing).hasSize(1);
+        assertThat(StandingVoiceSettings.DEFAULTS.numberedCount()).isZero();
     }
 }

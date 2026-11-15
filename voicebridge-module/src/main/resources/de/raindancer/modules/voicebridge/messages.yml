@@ -1,4 +1,4 @@
-# Rain's Voice Bridge — every line this module says.
+# Rain's Voice Bridge: every line this module says.
 #
 # Offered as a floor: anything an owner already has in their own messages.yml wins.
 voicebridge:
@@ -31,7 +31,7 @@ voicebridge:
     left: "<gray><white><name></white> left the Discord call."
 
   group:
-    joined: "<aqua>You are bridged to Discord channel <white><channel></white> (<count> there). <yellow>Everything you say in this group is heard on Discord."
+    joined: "<aqua>You are connected to the Discord channel <white><channel></white> (<count> present). <yellow>Everything said in this group is transmitted to Discord."
     joined-offline: "<aqua>You joined the Discord group. <yellow>Once the bot is connected, everything you say here is heard on Discord."
     left: "<gray>You left the Discord group. Discord no longer hears you."
 
@@ -74,38 +74,38 @@ voicebridge:
     discord-not-linked: "You have no Minecraft player linked."
 
   proximity:
-    connected: "<aqua>Discord connected: <white>people near you hear you, and you hear them.</white> <gray>/voicebridge groups for voice groups."
+    connected: "<aqua>Discord voice is connected. Players near you can hear you, and you can hear them. <gray>/voicebridge groups for voice groups."
     disconnected: "<gray>Discord voice disconnected."
     dm:
       not-linked: "To talk in Minecraft proximity chat, link first: type /voicebridge link in game, then /link <code> here."
-      not-online: "Join the Minecraft server first; you are moved into your own channel as soon as you are online."
+      not-online: "Join the Minecraft server first. You are moved into your own channel as soon as you are online."
       not-ready: "The Minecraft voice chat is not running yet. Try again in a moment."
-      has-mod: "You have Simple Voice Chat in your game already, so you do not need Discord for it."
-      no-free-bot: "Every proximity line is in use right now. Try again in a little while."
+      has-mod: "Simple Voice Chat is installed in your game, so Discord is not needed for voice chat."
+      no-free-bot: "Every proximity line is in use. Try again in a little while."
       no-permission: "You may not use voice chat on the Minecraft server."
-      failed: "Your private voice channel could not be set up. Please tell the server staff."
+      failed: "Your private voice channel could not be set up. Tell the server staff."
 
   channels:
     joined-general: "<green>You are in the General voice group."
     joined-staff: "<green>You are in the staff voice group."
-    not-staff: "<gray>The staff voice group is for staff. It is also hidden, so officially you never heard of it."
+    not-staff: "<gray>The staff voice group is for staff only."
     no-voice-chat: "<red>Voice chat is not running on this server."
     no-mod: "<gray>You need the Simple Voice Chat mod connected to join a voice group."
-    no-staff-group: "<gray>The staff voice group is not there yet — give it a few seconds."
+    no-staff-group: "<gray>The staff voice group is not there yet. Try again in a few seconds."
 
   groups:
     usage: "<gray>/voicebridge group join <name> [password]  ·  group leave  ·  group create <name> [password] [normal|open|isolated]"
     joined: "<green>You joined the voice group."
     left: "<gray>You left your voice group."
-    created: "<green>Group made, and you are in it."
+    created: "<green>Group created. You are in it."
     needs-password: "<yellow>That group has a password: /voicechat join <name> <password>, or ask somebody inside to invite you."
     wrong-password: "<red>That is not the group's password."
-    cannot-check: "<red>That group's password cannot be checked on this server; ask somebody inside to invite you."
+    cannot-check: "<red>That group's password cannot be checked on this server. Ask somebody inside to invite you."
     no-such-group: "<red>There is no such voice group (any more)."
     ambiguous: "<red>More than one group has that name. Join from /voicebridge groups instead."
     not-in-group: "<gray>You are not in a voice group."
-    bad-name: "<red>A group name is 1 to 24 characters, on one line."
-    bad-type: "<red>A group is normal, open or isolated."
+    bad-name: "<red>A group name is 1 to 24 characters on one line."
+    bad-type: "<red>A group type is normal, open or isolated."
     no-such-player: "<red><player> is not online."
     invite-sent: "<green>Invited <white><player></white> to your voice group."
     invited: "<aqua><white><player></white> invites you to the voice group <white><group></white>."

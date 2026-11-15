@@ -1,8 +1,8 @@
 id: voice-admin
 title: Setting up the voice bridge
-summary: Bot token, Discord ids, reconnecting and what the status says — for whoever runs the bridge.
+summary: "Bot token, Discord ids, reconnecting and what the status says, for whoever runs the bridge."
 intro: |
-  A bot, a token, two ids and some patience. Nothing here is hard, only fiddly.
+  You need a bot, a token and two Discord ids.
 icon: JUKEBOX
 category: Staff
 order: 930
@@ -21,11 +21,11 @@ sections:
   - question: How do I give the bot its token?
     title: The token
     text: |
-      From the server console only — what you type in game lands in the log: {cmd:/voicebridge token add <token>}, or set the <white>RAINS_VOICEBRIDGE_TOKEN</white> variable (it wins over a stored one). {cmd:/voicebridge token clear} removes this server's stored tokens. Then {cmd:/voicebridge reconnect}.
+      Use the server console only, because what you type in game lands in the log: {cmd:/voicebridge token add <token>}, or set the <white>RAINS_VOICEBRIDGE_TOKEN</white> variable (it wins over a stored one). {cmd:/voicebridge token clear} removes this server's stored tokens. Then {cmd:/voicebridge reconnect}.
   - question: How do I know it works?
     title: Status
     text: |
-      {cmd:/voicebridge status} says connecting, connected (channel, who is on Discord, who is in the group), or why not. Common ones: Discord refused the token; the bot is not on that Discord server; the channel does not exist or the bot cannot see it; the bot lacks Connect or Speak. {cmd:/voicebridge reconnect} tries again.
+      {cmd:/voicebridge status} says connecting, connected (channel, who is on Discord, who is in the group), or why not. Common ones: Discord refused the token, the bot is not on that Discord server, the channel does not exist or the bot cannot see it, or the bot lacks Connect or Speak. {cmd:/voicebridge reconnect} tries again.
   - question: What are the sound settings?
     title: Sound
     text: |

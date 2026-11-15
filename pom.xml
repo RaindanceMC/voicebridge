@@ -22,7 +22,7 @@
     <properties>
         <rainscore.version>2.85.0</rainscore.version>
         <modules-wrapper.version>1.11.0</modules-wrapper.version>
-        <voicebridge-module.version>0.9.0</voicebridge-module.version>
+        <voicebridge-module.version>0.9.1</voicebridge-module.version>
     </properties>
 
     <modules>

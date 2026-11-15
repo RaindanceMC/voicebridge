@@ -30,7 +30,7 @@
         <!-- 0.5.0: team voice for games: RainsCore's VoiceGroups asks, a hidden isolated SVC group answers (TeamVoice). -->
         <!-- 0.6.0: standing voice groups — General for everybody at all times, a hidden Staff group while staff are online; /voicebridge general, /voicebridge staff. -->
         <!-- 0.9.0: numbered standing groups (numbered.count, numbered.name — VC 1 to VC 5). -->
-        <plugin.version>0.9.0</plugin.version>
+        <plugin.version>0.9.1</plugin.version>
     </properties>
 
     <dependencies>

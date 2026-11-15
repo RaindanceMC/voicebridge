@@ -42,7 +42,10 @@ import java.util.function.Supplier;
 public final class LobbyService implements IVoiceBridgeService {
 
     /** Private channels carry this in front of the player's name, which is also how orphans are found. */
-    static final String CHANNEL_PREFIX = "🎧 ";
+    static final String CHANNEL_PREFIX = "MC voice: ";
+
+    /** The prefix older versions used, still recognised so their leftover channels are cleaned up. */
+    private static final String LEGACY_CHANNEL_PREFIX = "\uD83C\uDFA7 ";
 
     private static final List<Permission> USE = List.of(Permission.VIEW_CHANNEL, Permission.VOICE_CONNECT,
             Permission.VOICE_SPEAK);
@@ -331,7 +334,9 @@ public final class LobbyService implements IVoiceBridgeService {
         Category category = categoryFor(guild);
         List<VoiceChannel> candidates = category == null ? guild.getVoiceChannels() : category.getVoiceChannels();
         for (VoiceChannel channel : candidates) {
-            if (channel.getName().startsWith(CHANNEL_PREFIX) && channel.getMembers().isEmpty()
+            String name = channel.getName();
+            if ((name.startsWith(CHANNEL_PREFIX) || name.startsWith(LEGACY_CHANNEL_PREFIX))
+                    && channel.getMembers().isEmpty()
                     && !channel.getId().equals(settings.activeLobby())) {
                 channel.delete().queue(ok -> { }, failed -> { });
             }

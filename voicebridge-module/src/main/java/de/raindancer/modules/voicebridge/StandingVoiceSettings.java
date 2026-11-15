@@ -40,7 +40,7 @@ public record StandingVoiceSettings(
         String staffPermission,
 
         @In("voicebridge/channels") @Title("Numbered groups")
-        @Describe("How many more open groups are always there, numbered — e.g. 5 for VC 1 to VC 5. 0: none.")
+        @Describe("How many more open groups are always there, numbered, e.g. 5 for VC 1 to VC 5. 0 means none.")
         @Range(min = 0, max = 10)
         @Key("numbered.count")
         int numberedCount,

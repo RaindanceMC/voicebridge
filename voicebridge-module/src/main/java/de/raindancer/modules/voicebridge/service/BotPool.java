@@ -61,7 +61,7 @@ public final class BotPool {
                         .build();
                 jda.awaitReady();
                 if (jda.getGuildById(guildId) == null) {
-                    log.warn("Proximity bot {} ({}) is not on the Discord server — invite it.", number,
+                    log.warn("Proximity bot {} ({}) is not on the Discord server. Invite it.", number,
                             jda.getSelfUser().getName());
                     jda.shutdownNow();
                     continue;

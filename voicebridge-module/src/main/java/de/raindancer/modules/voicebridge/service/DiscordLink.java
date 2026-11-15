@@ -129,7 +129,7 @@ public final class DiscordLink implements IVoiceBridgeService {
 
         Guild guild = client.getGuildById(target.guildId());
         if (guild == null) {
-            log.warn("The bot is not on the Discord server {} — invite it first.", target.guildId());
+            log.warn("The bot is not on the Discord server {}. Invite it first.", target.guildId());
             report(BridgeStatus.failed("voicebridge.failed.no-server"));
             return;
         }

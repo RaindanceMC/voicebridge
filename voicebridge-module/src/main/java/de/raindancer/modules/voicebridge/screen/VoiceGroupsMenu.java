@@ -127,7 +127,7 @@ public final class VoiceGroupsMenu extends PaginatedMenu<GroupView> implements I
                 "",
                 "Click a group to join it. A locked one needs its password:",
                 "type /voicechat join <name> <password>, or ask somebody",
-                "inside to invite you — an invite lets you in without it.",
+                "inside to invite you. An invite lets you in without it.",
                 "",
                 "Normal: the group hears itself, and you still hear people near you.",
                 "Open: people near you hear the group too.",
